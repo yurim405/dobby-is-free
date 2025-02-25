@@ -24,24 +24,9 @@ jobs:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
             channel: ${{ secrets.SLACK_CHANNEL_ID }}
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Dobby is free🧙🏻‍♂️"
-                  },
-                  "accessory": {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "Click Me",
-                      "emoji": true
-                    },
-                    "value": "click_me_123",
-                    "action_id": "button-action"
-                  }
-                }
-              ]
-            }
+            text: simple test
+            blocks: 
+              - type: "section"
+                text: 
+                  type: "mrkdwn"
+                  text: "Dobby is free🧙🏻‍♂️"
