@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: 예약 전송 시간 계산(1분)
         id: calc_time
-        run: echo "post_at=$(($(date +%s) + 60))" >> $GITHUB_ENV
+        run: echo "POST_AT=$(($(date +%s) + 60))" >> $GITHUB_ENV
 
       - name: Slack 예약 메세지 전송
         uses: slackapi/slack-github-action@v2.0.0
@@ -24,7 +24,8 @@ jobs:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
             channel: ${{ secrets.SLACK_CHANNEL_ID }}
-            text: simple test
+            post_at: "${{ env.POST_AT }}"
+            text: "simple test"
             blocks: 
               - type: "section"
                 text: 
