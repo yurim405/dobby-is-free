@@ -9,3 +9,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'Hello, GitHub Actions!'
+
+  slack-notification:  # jobs 레벨에서 정의되어야 함
+    runs-on: ubuntu-latest
+    steps:
+      - name: 예약 전송 시간 계산(1분)
+        id: calc_time
+        run: echo "post_at=$(($(date +%s) + 60))" >> $GITHUB_ENV
+
+      - name: Slack 예약 메세지 전송
+        uses: slackapi/slack-github-action@v1.26.0
+        with: 
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Dobby is free🧙🏻‍♂️"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Click Me",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
