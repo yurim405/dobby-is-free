@@ -1,0 +1,11 @@
+name: merge-noti-slack
+
+on: 
+  push:
+    branches: [main]
+  
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Hello, GitHub Actions!'
