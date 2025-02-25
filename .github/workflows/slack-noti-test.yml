@@ -18,10 +18,12 @@ jobs:
         run: echo "post_at=$(($(date +%s) + 60))" >> $GITHUB_ENV
 
       - name: Slack 예약 메세지 전송
-        uses: slackapi/slack-github-action@v1.26.0
-        with: 
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
+            channel: ${{ secrets.SLACK_CHANNEL_ID }}
             {
               "blocks": [
                 {
@@ -43,5 +45,3 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
