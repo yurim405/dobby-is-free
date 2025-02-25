@@ -10,24 +10,30 @@ jobs:
     steps:
       - run: echo 'Hello, GitHub Actions!'
 
-  slack-notification:  # jobs 레벨에서 정의되어야 함
+  slack-notification:
     runs-on: ubuntu-latest
     steps:
-      - name: 예약 전송 시간 계산(1분)
+      - name: 예약 전송 시간 계산 (1분 후)
         id: calc_time
         run: echo "POST_AT=$(($(date +%s) + 60))" >> $GITHUB_ENV
 
-      - name: Slack 예약 메세지 전송
+      - name: Slack 예약 메시지 전송
         uses: slackapi/slack-github-action@v2.0.0
         with:
-          method: chat.postMessage
+          method: chat.scheduleMessage  # ✅ 예약 전송 API로 변경
           token: ${{ secrets.SLACK_BOT_TOKEN }}
-          payload: |
-            channel: ${{ secrets.SLACK_CHANNEL_ID }}
-            post_at: "${{ env.POST_AT }}"
-            text: "simple test"
-            blocks: 
-              - type: "section"
-                text: 
-                  type: "mrkdwn"
-                  text: "Dobby is free🧙🏻‍♂️"
+          payload: >
+            {
+              "channel": "${{ secrets.SLACK_CHANNEL_ID }}",
+              "post_at": ${{ env.POST_AT }},
+              "text": "simple test",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Dobby is free 🧙🏻‍♂️"
+                  }
+                }
+              ]
+            }
