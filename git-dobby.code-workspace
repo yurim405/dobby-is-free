@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "path": "apps/dobby"
+    },
+    {
+      "path": "packages/dobby-design-system"
+    },
+    {
+      "path": "packages/shared"
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "arcanis.vscode-zipfs",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "bradlc.vscode-tailwindcss"
+    ]
+  }
+}
