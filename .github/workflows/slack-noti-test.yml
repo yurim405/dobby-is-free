@@ -32,8 +32,30 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Dobby is free 🧙🏻‍♂️"
+                    "text": "🚀 *배포 완료 & 모니터링 진행 완료!*"
                   }
-                }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "배포 브랜치 `${{ github.ref }}`의 배포가 성공적으로 완료되었으며, *1~2시간 모니터링*도 완료되었습니다. 🎉\n\n해당 브랜치를 `main`에 머지해주세요!"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "🔗 PR 보기 & 머지하기",
+                        "emoji": true
+                      },
+                      "url": "https://github.com/yurim405/dobby-is-free",
+                      "style": "primary"
+                    }
+                  ]
+                },
               ]
             }
