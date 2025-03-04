@@ -1,0 +1,17 @@
+name: Auto Approve Hotfix PRs
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, reopened]
+
+jobs:
+  auto-approve:
+    if: startsWith(github.head_ref, 'hotfix/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve PR
+        uses: hmarr/auto-approve-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
