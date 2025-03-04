@@ -10,8 +10,10 @@ jobs:
   auto-approve:
     if: startsWith(github.head_ref, 'hotfix/')
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
-      - name: Approve PR
-        uses: hmarr/auto-approve-action@v3
+      - name: Auto Approve PR
+        uses: hmarr/auto-approve-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
