@@ -7,14 +7,20 @@ on:
 
 permissions:
       pull-requests: write
+      contents: read
 
 jobs:
   auto-approve:
-        if: startsWith(github.head_ref, 'hotfix/')
-        runs-on: ubuntu-latest
-        steps:
-              - name: Auto Approve PR
-                uses: hmarr/auto-approve-action@v4
-                with: 
-                      github-token: ${{ secrets.PAT_AUTO_APPROVE }}
-                      review-message: "Auto approved automated PR"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is from hotfix/*
+        id: check-branch
+        run: echo "hotfix_branch=$(echo ${{ github.head_ref }} | grep -E '^hotfix/')" >> $GITHUB_ENV
+
+      - name : Auto Approve PR
+        if: env.hotfix_branch
+        uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.PAT_AUTO_APPROVE }}
+          review-message: "Auto approved automated PR"
+        
